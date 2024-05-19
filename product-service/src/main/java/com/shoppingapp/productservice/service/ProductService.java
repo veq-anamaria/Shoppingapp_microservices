@@ -1,8 +1,12 @@
 package com.shoppingapp.productservice.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.shoppingapp.productservice.dto.ProductRequest;
+import com.shoppingapp.productservice.dto.ProductResponse;
 import com.shoppingapp.productservice.model.Product;
 import com.shoppingapp.productservice.repository.ProductRepository;
 
@@ -32,5 +36,21 @@ public class ProductService {
         log.info("Product {} is saved", product.getId());
         //odata ce adaugam prod, vor aparea loguri
         
+    }
+
+//return lista de produse
+    public List<ProductResponse> getAllProducts() {
+    List<Product> products = productRepository.findAll();
+
+    return products.stream().map(product -> mapToProductResponse(product)).collect(Collectors.toList());
+    }
+
+    private ProductResponse mapToProductResponse(Product product) {
+        return ProductResponse.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .build();
     }
 }
