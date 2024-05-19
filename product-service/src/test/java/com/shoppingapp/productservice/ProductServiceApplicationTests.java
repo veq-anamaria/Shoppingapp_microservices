@@ -21,6 +21,7 @@ class ProductServiceApplicationTests {
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo: 4.4.2");
 	 
 	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
+		string 
 
 
 	}
